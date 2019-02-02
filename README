@@ -1,0 +1,46 @@
+tag -- a Tag system processor
+
+This program is a portable implementation of Emil Post's Tag systems [0].
+
+Synopsis
+  tag [OPTIONS]... [FILE] [INPUT]
+
+Description
+  Compile production rules of a Tag system given in FILE, run the system with given INPUT word, and print each step to standard output until the system halts.
+
+  The syntax of production rules is as follows; each line starts with a character ("head"), followed by one or more spaces, and ends with a possibly empty word ("tail").  No two different rules have the same head.  Neither head nor tail can contain spaces.  Empty lines and ones starting with spaces are ignored.
+
+  No spaces is allowed in any INPUT word.
+
+  The Tag system halts if the current word is empty or the word's leading character does not belong to the set of heads.  Otherwise the rule which head matches with the leading character is applied; the updated word for next step is the concatenation of the original word and the matched rule, except its first d characters.  Here d is a positive integer called the deletion number.
+
+  -d NUM
+         specify the deletion number (default 2)
+
+  -i, --indent
+         indent output, the depth of indentation is the deletion number multiplied by the step number
+
+  -m, -m LENGTH
+         exit if the length of the current word exceeds LENGTH (default 100)
+
+  -n, -n NUM
+         exit if the number of steps reaches NUM (default 100)
+
+  -q, --quiet
+         suppress output
+
+  -h, --help
+         display this help and exit
+
+  --version
+         output version information and exit
+
+  Exit status is 0 if it halts, 1 if it exits due to -m or -n option's effect, 2 otherwise.
+
+Author
+  Takeshi Abe <tabe@fixedpoint.jp>
+
+License
+  The MIT license
+
+[0] https://en.wikipedia.org/wiki/Tag_system

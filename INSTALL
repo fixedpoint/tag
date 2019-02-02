@@ -1,0 +1,19 @@
+How to build and install tag
+----------------------------
+
+The only real prerequisite for building tag is a decent C99 compiler.
+
+On Windows, the following command on Developer Command Prompt for VS 2017
+
+> cl tag.c
+
+generates an executable named tag.exe, which has no special dependency
+so you can relocate it into your favorite folder in PATH.
+
+On Unix-like system, running GNU Make with GCC or Clang results in an executable
+named tag:
+
+$ make
+
+All you have to do for installation is to move the executable to a directory in
+your PATH.
