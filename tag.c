@@ -74,14 +74,14 @@ static FILE *fp;
 
 static int num_lines = 0;
 
-static void free_rules()
+static void free_rules(void)
 {
 	for (int i=0;i<num_rules;i++)
 		free(rules[i].tail);
 	free(rules);
 }
 
-static int skip_line()
+static int skip_line(void)
 {
 	int c = fgetc(fp);
 	while (c != EOF) {
@@ -103,7 +103,7 @@ static int skip_line()
 	return EOF;
 }
 
-static void memory_error_at_compilation()
+static void memory_error_at_compilation(void)
 {
 	free_rules();
 	fclose(fp);
@@ -111,7 +111,7 @@ static void memory_error_at_compilation()
 	exit(TAG_STATUS_ERROR);
 }
 
-static int read_tail()
+static int read_tail(void)
 {
 	int c = fgetc(fp);
 	if (c == EOF) {
