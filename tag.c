@@ -146,7 +146,7 @@ static int read_tail(void)
 		tail = malloc(len_tail);
 		if (!tail)
 			memory_error_at_compilation();
-		tail[0] = c;
+		tail[0] = (char)c;
 		while ( (c = fgetc(fp)) != EOF) {
 			if (c == '\r') {
 				c = fgetc(fp);
@@ -169,7 +169,7 @@ static int read_tail(void)
 				free(tail);
 				memory_error_at_compilation();
 			}
-			t[len_tail++] = c;
+			t[len_tail++] = (char)c;
 			tail = t;
 		}
 	}
