@@ -33,6 +33,8 @@ THE SOFTWARE.
 #define TAG_DEFAULT_MAX_LENGTH 100
 #define TAG_DEFAULT_NUM_STEPS 100
 
+#define TAG_MINIMUM_BUFFER_SIZE 4096
+
 #define TAG_HELP "tag [OPTIONS]... [FILE] [INPUT]\n"					\
 	"Options:\n"														\
 	"  -d NUM\n"														\
@@ -73,6 +75,14 @@ static struct rule *rules = NULL;
 static FILE *fp;
 
 static int num_lines = 0;
+
+static size_t buffer_size_ceil(size_t n)
+{
+	size_t i = TAG_MINIMUM_BUFFER_SIZE;
+	while (i < n)
+		i *= 2;
+	return i;
+}
 
 static void free_rules(void)
 {
@@ -244,7 +254,7 @@ static int run(const char *input)
 		return TAG_STATUS_SUCCESS;
 	}
 
-	size_t len_buf = len * 2;
+	size_t len_buf = buffer_size_ceil(len);
 	char *buf = malloc(len_buf);
 	if (!buf) {
 		free_rules();
@@ -273,7 +283,8 @@ static int run(const char *input)
 				goto done;
 			size_t cap = len + rules[k].len_tail - num_deletion;
 			if (len_buf < cap) {
-				char *b = realloc(buf, cap);
+				size_t len_tmp = buffer_size_ceil(cap);
+				char *b = realloc(buf, len_tmp);
 				if (!b) {
 					free(buf);
 					free_rules();
@@ -281,7 +292,7 @@ static int run(const char *input)
 					return TAG_STATUS_ERROR;
 				}
 				buf = b;
-				len_buf = cap;
+				len_buf = len_tmp;
 			}
 			if (len < (size_t)num_deletion) {
 				size_t len1 = num_deletion - len;
