@@ -12,10 +12,13 @@ Description
 
   No spaces is allowed in any INPUT word.
 
-  The Tag system halts if the current word is empty or the word's leading character does not belong to the set of heads.  Otherwise the rule which head matches with the leading character is applied; the updated word for next step is the concatenation of the original word and the matched rule, except its first d characters.  Here d is a positive integer called the deletion number.
+  The behavior of a Tag system is determined by a constant, positive integer D called the deletion number.  D is 2 unless specified otherwise by -d option.  At each step of production, the only state of a Tag system is its current word, say W.  By default, the system halts if either (1) the length of W is less than D or (2) W's first character does not belong to the set of heads.  However, if -e option is specified, it halts only if either W is empty or (2) holds.  The rule which head matches with the leading character is applied; the updated word for next step is the concatenation of W and the tail of the matched rule, except its first D characters.
 
-  -d NUM
-         specify the deletion number (default 2)
+  -d D
+         specify the deletion number D (default 2)
+
+  -e
+         halt only on the empty word regardless of the deletion number
 
   -i, --indent
          indent output, the depth of indentation is the deletion number multiplied by the step number

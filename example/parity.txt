@@ -1,0 +1,5 @@
+  This 2-Tag system accepts a non-empty word of alphabet {a} as input, and then halts with word "0" if the length of the input word is even, with "1" otherwise.
+  The case of input word "a" (length 1) works too if -e option is given.
+a 01
+0 0
+1 1

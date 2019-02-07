@@ -37,8 +37,10 @@ THE SOFTWARE.
 
 #define TAG_HELP "tag [OPTIONS]... [FILE] [INPUT]\n"					\
 	"Options:\n"														\
-	"  -d NUM\n"														\
-	"     specify the deletion number (default 2)\n"					\
+	"  -d D\n"															\
+	"     specify the deletion number D (default 2)\n"					\
+	"  -e\n"															\
+	"     halt only on the empty word regardless of the deletion number\n" \
 	"  -i, --indent\n"													\
 	"     indent output, the depth of indentation is the deletion number multiplied by the step number\n" \
 	"  -m, -m LENGTH\n"													\
@@ -53,6 +55,8 @@ THE SOFTWARE.
 	"     output version information and exit\n"
 
 static int num_deletion = 2;
+
+static int empty_end = 0;
 
 static int indent = 0;
 
@@ -237,6 +241,11 @@ static void compile(const char *file)
 	fclose(fp);
 }
 
+static int halts(size_t len)
+{
+	return empty_end ? (len == 0) : (len < (size_t)num_deletion);
+}
+
 static int run(const char *input)
 {
 	if (strchr(input, ' ')) {
@@ -249,7 +258,7 @@ static int run(const char *input)
 		puts(input);
 
 	size_t len = strlen(input);
-	if (len < (size_t)num_deletion) {
+	if (halts(len)) {
 		free_rules();
 		return TAG_STATUS_SUCCESS;
 	}
@@ -265,7 +274,7 @@ static int run(const char *input)
 
 	int n = 1;
  step:
-	if (len < (size_t)num_deletion)
+	if (halts(len))
 		goto done;
 	if (num_steps > 0 && num_steps <= n) {
 		free(buf);
@@ -355,6 +364,11 @@ int main(int argc, char *argv[])
 				fputs(TAG_HELP, stderr);
 				return TAG_STATUS_ERROR;
 			}
+			continue;
+		}
+		if (strcmp(argv[i], "-e") == 0) {
+			empty_end = 1;
+			++i;
 			continue;
 		}
 		if ( strcmp(argv[i], "-i") == 0 ||
