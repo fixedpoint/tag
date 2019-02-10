@@ -42,12 +42,13 @@ Description
 
 Example
   Production rules of a well-known 2-Tag system for Collatz (sub)sequences can be encoded in the following three lines:
-  ---
+
   a bc
   b a
   c aaa
-  ---
+
   Note that the leading spaces of the above rules are only for pretty formatting and must be avoided at a rule line.  Supposing that the rule file is named collatz.txt in the current directory, invoking tag as follows computes the system starting from word "aaa":
+
   $ tag collatz.txt aaa
   aaa
   abc
