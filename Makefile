@@ -14,4 +14,4 @@ clean:
 	-rm -f tag
 
 tag: tag.c
-	$(CC) -W -Wall -o $@ $<
+	$(CC) -std=c11 -W -Wall -o $@ $<
