@@ -1,0 +1,5 @@
+  This 2-Tag system accepts a non-empty word of alphabet {a} as input.
+  The length of an output word including only alphabet {a} corresponds to a number occurring in the Collatz sequence staring from the natural number encoded by the length of the input word.
+a bc
+b a
+c aaa
