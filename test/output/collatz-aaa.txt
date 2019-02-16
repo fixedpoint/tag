@@ -1,0 +1,25 @@
+aaa
+  abc
+    cbc
+      caaa
+        aaaaa
+          aaabc
+            abcbc
+              cbcbc
+                cbcaaa
+                  caaaaaa
+                    aaaaaaaa
+                      aaaaaabc
+                        aaaabcbc
+                          aabcbcbc
+                            bcbcbcbc
+                              bcbcbca
+                                bcbcaa
+                                  bcaaa
+                                    aaaa
+                                      aabc
+                                        bcbc
+                                          bca
+                                            aa
+                                              bc
+                                                a
