@@ -52,11 +52,13 @@ matrix:
 
     - os: windows
       script:
-        - build-tag.bat
+        - cmd.exe /c build-tag.bat
+
+  allow_failures:
+    - os: windows
 
 before_install:
   - eval "${MATRIX_EVAL}"
 
 script:
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make all check; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then make all check; fi
+  - make all check
