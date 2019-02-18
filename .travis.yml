@@ -58,4 +58,4 @@ before_install:
 script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make all check; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then make all check; fi
-  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then cmd /c build-tag.bat; fi
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then build-tag.bat; fi
