@@ -54,6 +54,7 @@ matrix:
     - os: windows
       install:
         - choco install visualstudio2017community
+        - choco install visualstudio2017-workload-vctools
       script:
         - cmd.exe /c build-tag.bat
 
