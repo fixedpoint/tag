@@ -50,8 +50,12 @@ matrix:
     - os: osx
       osx_image: xcode10.1
 
+    - os: windows
+
 before_install:
   - eval "${MATRIX_EVAL}"
 
 script:
-  - make all check
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make all check; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then make all check; fi
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then ./build-tag.bat; fi
