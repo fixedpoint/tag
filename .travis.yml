@@ -52,6 +52,8 @@ matrix:
       osx_image: xcode10.1
 
     - os: windows
+      install:
+        - choco install visualstudio2017community
       script:
         - cmd.exe /c build-tag.bat
 
