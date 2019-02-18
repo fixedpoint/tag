@@ -1,6 +1,7 @@
 language: c
 
 matrix:
+  fast_finish: true
   include:
     - os: linux
       addons:
