@@ -1,7 +1,6 @@
 language: c
 
 matrix:
-  fast_finish: true
   include:
     - os: linux
       addons:
@@ -50,16 +49,6 @@ matrix:
 
     - os: osx
       osx_image: xcode10.1
-
-    - os: windows
-      install:
-        - choco install visualstudio2017community
-        - choco install visualstudio2017-workload-vctools
-      script:
-        - cmd.exe /c build-tag.bat
-
-  allow_failures:
-    - os: windows
 
 before_install:
   - eval "${MATRIX_EVAL}"
