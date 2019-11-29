@@ -1,57 +1,20 @@
+version: ~> 1.0
+
 language: c
 
-matrix:
-  include:
-    - os: linux
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - gcc-4.9
-      env:
-        - MATRIX_EVAL="CC=gcc-4.9"
+arch:
+  - amd64
+  - arm64
+  - ppc64le
+  - s390x
 
-    - os: linux
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - gcc-8
-      env:
-        - MATRIX_EVAL="CC=gcc-8"
+os:
+  - linux
+  - osx
 
-    - os: linux
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-            - llvm-toolchain-trusty-6.0
-          packages:
-            - clang-6.0
-      env:
-        - MATRIX_EVAL="CC=clang-6.0"
-
-    - os: linux
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-            - llvm-toolchain-trusty-8
-          packages:
-            - clang-8
-      env:
-        - MATRIX_EVAL="CC=clang-8"
-
-    - os: osx
-      osx_image: xcode9.4
-
-    - os: osx
-      osx_image: xcode10.1
-
-before_install:
-  - eval "${MATRIX_EVAL}"
+compiler:
+  - gcc
+  - clang
 
 script:
   - make all check
