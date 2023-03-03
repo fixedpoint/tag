@@ -1,0 +1,68 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  ci-on-ubuntu-22_04:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build
+        run: make
+      - name: Test
+        run: make check
+
+  ci-on-ubuntu-20_04:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build
+        run: make
+      - name: Test
+        run: make check
+
+  ci-on-macos-12:
+    runs-on: macos-12
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build
+        run: make
+      - name: Test
+        run: make check
+
+  ci-on-macos-11:
+    runs-on: macos-11
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build
+        run: make
+      - name: Test
+        run: make check
+
+  ci-on-windows-2022:
+    runs-on: windows-2022
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build
+        run: |
+          call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x64
+          cl tag.c
+        shell: cmd
+      - uses: actions/upload-artifact@v3
+        with:
+          name: windows-2022-tag-exe
+          path: tag.exe
+
+  ci-on-windows-2019:
+    runs-on: windows-2019
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build
+        run: |
+          call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x64
+          cl tag.c
+        shell: cmd
+      - uses: actions/upload-artifact@v3
+        with:
+          name: windows-2019-tag-exe
+          path: tag.exe
