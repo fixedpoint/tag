@@ -3,6 +3,28 @@ name: CI
 on: [push, pull_request]
 
 jobs:
+  ci-via-nix-on-ubuntu-latest:
+    runs-on: ubuntu-latest
+    container:
+      image: nixos/nix:latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Update
+        run: nix-channel --update
+      - name: Build
+        run: nix --extra-experimental-features "nix-command flakes" build -L
+
+  ci-via-nix-on-macos-latest:
+    runs-on: macos-latest
+    container:
+      image: nixos/nix:latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Update
+        run: nix-channel --update
+      - name: Build
+        run: nix --extra-experimental-features "nix-command flakes" build -L
+
   ci-on-ubuntu-22_04:
     runs-on: ubuntu-22.04
     steps:
