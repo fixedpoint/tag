@@ -1,4 +1,4 @@
-.PHONY: all check clean
+.PHONY: all check clean install
 
 all: tag
 
@@ -15,6 +15,10 @@ check:
 
 clean:
 	-rm -f tag
+
+install:
+	install -d $(out)/bin
+	install tag $(out)/bin/
 
 tag: tag.c
 	$(CC) -std=c11 -W -Wall -o $@ $<

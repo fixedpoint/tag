@@ -1,7 +1,7 @@
 {
   description = "A flake for building tag";
 
-  inputs.nixpkgs.url = github:NixOS/nixpkgs/nixos-22.11;
+  inputs.nixpkgs.url = github:NixOS/nixpkgs/nixos-23.05;
 
   outputs = { self, nixpkgs }:
     let
@@ -11,13 +11,7 @@
           pname = "tag";
           version = "0.9.0";
           src = self;
-          buildPhase = "make";
           doCheck = true;
-          checkPhase = "make check";
-          installPhase = ''
-            install -d $out/bin
-            install -m 0555 tag $out/bin
-          '';
         };
     in {
       packages.aarch64-darwin.default = derivation_tag "aarch64-darwin";
